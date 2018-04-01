@@ -1,0 +1,29 @@
+body {
+	text-align: center;
+}
+
+
+
+button {
+	font-size: 30px;
+	margin: 10px;
+	text-decoration: none;
+	border: 2px solid black;
+	box-shadow: 2px 2px 2px;
+	padding: 5px;
+}
+
+#stopwatch {
+	font-size: 100px;
+}
+
+#list {
+	margin: 0 auto;
+	margin-top: 25px;
+	width: 100px;
+}
+
+li {
+	margin: 10px;
+	font-size: 40px;
+}
