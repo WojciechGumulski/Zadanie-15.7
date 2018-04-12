@@ -1,13 +1,14 @@
 class Stopwatch extends React.Component {
-    constructor(display) {
-        super(display);
+    constructor(props) {
+        super(props);
         this.state = {
             running: false,
             times: {
                 minutes: 0,
                 seconds: 0,
                 miliseconds: 0
-            }
+            },
+            results: []
         };
     }
 
@@ -71,16 +72,17 @@ class Stopwatch extends React.Component {
         clearInterval(this.watch);
     }
 
-    results() {
-        let wynik = this.format(this.times);
-        let rezultaty = document.getElementById('list');
-        let czas = document.createElement("li");
-        czas.innerText = wynik;
-        rezultaty.appendChild(czas);
+    save() {
+        const newResults = this.state.results.slice();
+        newResults.push(this.state.Stopwatch);
+
+        this.setState({
+            results: newResults
+        });
     }
 
     clear() {
-        document.getElementById('list').innerHTML = "";
+        this.setState({ results: [] });
     }
 
     pad0(value) {
@@ -92,11 +94,12 @@ class Stopwatch extends React.Component {
     }
 
     render() {
-        return React.createElement('div', {}, React.createElement('div', { className: 'controls' }, React.createElement('button', { onClick: () => this.start() }, 'Start'), React.createElement('button', { onClick: () => this.stop() }, 'Stop'), React.createElement('button', { onClick: () => this.reset() }, 'Zeruj'), React.createElement('button', { onClick: () => {
-                this.results();
-            } }, 'Zapisz wynik'), React.createElement('button', { onClick: () => this.clear() }, 'Wyczyść listę wyników')), React.createElement('div', { id: 'stopwatch' }, this.format()));
+
+        return React.createElement('div', {}, React.createElement('div', {}, React.createElement('button', { onClick: () => this.start() }, 'Start'), React.createElement('button', { onClick: () => this.stop() }, 'Stop'), React.createElement('button', { onClick: () => this.reset() }, 'Zeruj'), React.createElement('button', { onClick: () => this.save() }, 'Zapisz wynik'), React.createElement('button', { onClick: () => this.clear() }, 'Wyczyść listę wyników')), React.createElement('div', { id: 'stopwatch' }, this.format()), React.createElement('ol', {}, React.createElement('li', {}, this.state.results.map())));
     }
+
 }
 
 var element = React.createElement(Stopwatch);
+
 ReactDOM.render(element, document.getElementById('app'));
